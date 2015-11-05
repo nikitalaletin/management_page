@@ -9,3 +9,14 @@ table {
 td {
     border: 2px solid #000;
 }
+
+form {
+    position: absolute;
+    z-index: 101;
+    display:none;
+    width: 200px;
+    border: 2px solid black;
+    margin-top:50px;
+    margin-left: 200px;
+    background: cornflowerblue;
+}
