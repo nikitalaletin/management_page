@@ -2,21 +2,22 @@
  * Created by Никита on 04.11.2015.
  */
 var currentElement;
-
 $(document).ready(function(){
+
+    //тут работает кнопочка 'ADD' и добавляет новую строку
     $('body').on('click','.plusbtn',function() {
-        $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
+        $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
     });
+
+
+    //тут работает кнопочка 'REMOVE' и удаляет текущую строку
+
     $('body').on('click','.minusbtn', function() {
-        if($(".test tr").length != 1)
-        {
-            $(this).parent().parent().remove();
-        }
-        else
-        {
-            alert("You cannot delete first row");
-        }
+         $(this).parent().parent().remove();
     })
+
+    ////тут работает кнопочка 'EDIT' которая по клику открывает формочку
+
     $('body').on('click','.editbutton', function(e){
         var elem = $(e.target).parents('tr');
         currentElement=elem;
@@ -27,10 +28,16 @@ $(document).ready(function(){
         $('#sku').val(skuText);
         $('#price').val(priceText);
         $('form').fadeIn('slow');
-    })
+    });
+
+    //тут работает кнопочка 'CANCEL' в выпадающей форме и закрывает по клику форму
+
     $('#cancel').on('click', function(){
         $('form').hide();
-    })
+    });
+
+    ////тут работает кнопочка 'SUBMIT' и по клику апдейтит содержимое строки
+
     $('form').on('submit', function(e){
         e.preventDefault();
         $(currentElement.find('td')[0]).text($('#title').val());
@@ -38,4 +45,24 @@ $(document).ready(function(){
         $(currentElement.find('td')[2]).text($('#price').val());
         $('form').hide();
     })
+
+    $("div#dialog").dialog ({
+        autoOpen : false,
+        modal: true,
+        buttons: {
+            "Yeah!": function() {
+                $(this).dialog("close");
+            },
+            "Sure, Why Not": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    $("body").on( 'click','#open', function (event) {    // Open button Treatment
+        $("#dialog").dialog ("open");
+    });
+
+
+
 });
