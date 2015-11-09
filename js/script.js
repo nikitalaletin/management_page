@@ -2,27 +2,23 @@
  * Created by Никита on 04.11.2015.
  */
 var currentElement;
-
+var checkElement;
 $(document).ready(function(){
 
-    $(function() {
-        $("#dialog").dialog({
-            autoOpen: false
-        });
-        $("#button").on("click", function() {
-            $("#dialog").dialog("open");
-        });
-    });
-
-
+    //тут работает кнопочка 'ADD' и добавляет новую строку
     $('body').on('click','.plusbtn',function() {
-        $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
+        $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
     });
+
+
+    //тут работает кнопочка 'REMOVE' и удаляет текущую строку
 
     $('body').on('click','.minusbtn', function() {
-                $(this).parent().parent().remove();
+        $("#dialog").dialog ("open");
+        checkElement = $(this);
     })
 
+    ////тут работает кнопочка 'EDIT' которая по клику открывает формочку
 
     $('body').on('click','.editbutton', function(e){
         var elem = $(e.target).parents('tr');
@@ -34,11 +30,15 @@ $(document).ready(function(){
         $('#sku').val(skuText);
         $('#price').val(priceText);
         $('form').fadeIn('slow');
-    })
+    });
+
+    //тут работает кнопочка 'CANCEL' в выпадающей форме и закрывает по клику форму
 
     $('#cancel').on('click', function(){
         $('form').hide();
-    })
+    });
+
+    ////тут работает кнопочка 'SUBMIT' и по клику апдейтит содержимое строки
 
     $('form').on('submit', function(e){
         e.preventDefault();
@@ -47,4 +47,25 @@ $(document).ready(function(){
         $(currentElement.find('td')[2]).text($('#price').val());
         $('form').hide();
     })
+
+    $("div#dialog").dialog ({
+        autoOpen : false,
+        modal: true,
+        buttons: {
+            "Yeah!": function() {
+                $(this).dialog("close");
+                checkElement.parent().parent().remove();
+            },
+            "Sure, Why Not": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+//    $("body").on( 'click','#open', function (event) {    // Open button Treatment
+//        $("#dialog").dialog ("open");
+//   });
+
+
+
 });

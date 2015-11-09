@@ -4,39 +4,42 @@
     <meta charset="UTF-8">
     <title>management_page</title>
     <link rel="stylesheet" href="css/stylesheet.css" />
-    <link href="js/jquery-ui.min.css" rel="stylesheet">
+    <link rel=stylesheet type=text/css href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css' />
 </head>
 <body>
-    <div>
-        <input type="button" value="Add" class="plusbtn" />
-    </div>
-    <table width="50%" border="1" cellpadding="1" cellspacing="1" class="test">
-        <tr>
-            <td>Title</td>
-            <td>Sku</td>
-            <td>Price</td>
-            <td>Actions</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>$</td>
-            <td><input type="button" value="Remove" class="minusbtn"/><input type="button" value="Edit" class="editbutton"/></td>
-        </tr>
-    </table>
-    <form id="popupform">Title:
-        <input type="text" id="title" />
-        Sku:
-        <input type="text" id="sku" />
-        Price:
-        <input type="text" id="price" />
-        <input type="submit" value="Update"/>
-        <button type="button" id="cancel">Cancel</button>
-    </form>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
+<div>
+    <input type="button" value="Add" class="plusbtn" />
+</div>
+<table width="50%" border="1" cellpadding="1" cellspacing="1" class="test">
+    <tr>
+        <td>Title</td>
+        <td>Sku</td>
+        <td>Price</td>
+        <td>Actions</td>
+    </tr>
+    <tr>
+        <td>wrtwrt</td>
+        <td>245245245</td>
+        <td>$45</td>
+        <td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td>
+    </tr>
+</table>
+<form id="popupform">Title:
+    <input type="text" id="title" />
+    Sku:
+    <input type="text" id="sku" />
+    Price:
+    <input type="text" id="price" />
+    <input type="submit" value="Update"/>
+    <button type="button" id="cancel">Cancel</button>
+</form>
 
+<div id="dialog" title="Dialog for you">
+    <p> Do you really wanna kill this row?</p>
+</div>
+
+<script src='jquery/jquery.js'></script>
+<script src='jquery/jquery-ui.js'></script>
+<script src='js/script.js'></script>
 </body>
 </html>
