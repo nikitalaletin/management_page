@@ -4,19 +4,26 @@
 var currentElement;
 
 $(document).ready(function(){
+
+    $(function() {
+        $("#dialog").dialog({
+            autoOpen: false
+        });
+        $("#button").on("click", function() {
+            $("#dialog").dialog("open");
+        });
+    });
+
+
     $('body').on('click','.plusbtn',function() {
         $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
     });
+
     $('body').on('click','.minusbtn', function() {
-        if($(".test tr").length != 1)
-        {
-            $(this).parent().parent().remove();
-        }
-        else
-        {
-            alert("You cannot delete first row");
-        }
+                $(this).parent().parent().remove();
     })
+
+
     $('body').on('click','.editbutton', function(e){
         var elem = $(e.target).parents('tr');
         currentElement=elem;
@@ -28,9 +35,11 @@ $(document).ready(function(){
         $('#price').val(priceText);
         $('form').fadeIn('slow');
     })
+
     $('#cancel').on('click', function(){
         $('form').hide();
     })
+
     $('form').on('submit', function(e){
         e.preventDefault();
         $(currentElement.find('td')[0]).text($('#title').val());

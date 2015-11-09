@@ -20,3 +20,6 @@ form {
     margin-left: 200px;
     background: cornflowerblue;
 }
+#dialog {
+    display:none;
+}
