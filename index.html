@@ -10,12 +10,12 @@
 <div>
     <input type="button" value="Add" class="plusbtn" />
 </div>
-<table width="50%" border="1" cellpadding="1" cellspacing="1" class="test">
+<table width="50%" border="1" cellpadding="1" cellspacing="1" class="test" id="mytable">
     <tr>
-        <td>Title</td>
-        <td>Sku</td>
-        <td>Price</td>
-        <td>Actions</td>
+        <th>Title</th>
+        <th>Sku</th>
+        <th>Price</th>
+        <th>Actions</th>
     </tr>
     <tr>
         <td>wrtwrt</td>
@@ -38,8 +38,11 @@
     <p> Do you really wanna kill this row?</p>
 </div>
 
+<button type="button"  id="convert">Convert to JSON!</button>
+
 <script src='jquery/jquery.js'></script>
 <script src='jquery/jquery-ui.js'></script>
 <script src='js/script.js'></script>
+<script src='js/external/json/src/jquery.tabletojson.js'></script>
 </body>
 </html>

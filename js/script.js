@@ -56,16 +56,30 @@ $(document).ready(function(){
                 $(this).dialog("close");
                 checkElement.parent().parent().remove();
             },
-            "Sure, Why Not": function() {
+            "No, let it live": function() {
                 $(this).dialog("close");
             }
         }
     });
 
-//    $("body").on( 'click','#open', function (event) {    // Open button Treatment
-//        $("#dialog").dialog ("open");
-//   });
+    /*$('#convert').on('click', function() {
+     var cols = $('#mytable th').map(function() {
+     return $(this).text()
+     }).slice(0,3);
+     var tableJson = $('#mytable tr').map(function(i) {
+     var row={};
+     $(this).find('td').each(function(i) {
+     var rowName = cols[i];
+     row[rowName] = $(this).text();
+     })
+     return row;
+     }).get();
+     console.log(JSON.stringify(tableJson).slice(1));
+     });*/
 
-
-
+    $('#convert').click( function() {
+        var table = $('#mytable').slice(0,2).tableToJSON(); // Convert the table into a javascript object
+        console.log(table);
+        alert(JSON.stringify(table));
+    });
 });
