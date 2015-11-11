@@ -5,12 +5,13 @@
     <title>management_page</title>
     <link rel="stylesheet" href="css/stylesheet.css" />
     <link rel=stylesheet type=text/css href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css' />
+    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 </head>
 <body>
 <div>
     <input type="button" value="Add" class="plusbtn" />
 </div>
-<table width="50%" border="1" cellpadding="1" cellspacing="1" class="test" id="mytable">
+<table border="1" cellpadding="1" cellspacing="1" class="test" id="mytable">
     <tr>
         <th>Title</th>
         <th>Sku</th>
@@ -30,7 +31,7 @@
     <input type="text" id="sku" />
     Price:
     <input type="text" id="price" />
-    <input type="submit" value="Update"/>
+    <input type="submit" value="Update" id="update"/>
     <button type="button" id="cancel">Cancel</button>
 </form>
 

@@ -4,12 +4,13 @@
 var currentElement;
 var checkElement;
 $(document).ready(function(){
-
-    //тут работает кнопочка 'ADD' и добавляет новую строку
+    $(function() {
+        $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
+    });
     $('body').on('click','.plusbtn',function() {
         $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
+        $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
     });
-
 
     //тут работает кнопочка 'REMOVE' и удаляет текущую строку
 
