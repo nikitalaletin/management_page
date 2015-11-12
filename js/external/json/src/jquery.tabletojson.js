@@ -5,7 +5,7 @@
 
     // Set options
     var defaults = {
-      ignoreColumns: [],
+      ignoreColumns: [3],
       onlyColumns: null,
       ignoreHiddenRows: true,
       ignoreEmptyRows: false,

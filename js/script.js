@@ -5,18 +5,20 @@ var currentElement;
 var checkElement;
 $(document).ready(function(){
 
-    //тут работает кнопочка 'ADD' и добавляет новую строку
+    $(function() {
+        $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
+    });
     $('body').on('click','.plusbtn',function() {
         $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
+        $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
     });
-
 
     //тут работает кнопочка 'REMOVE' и удаляет текущую строку
 
     $('body').on('click','.minusbtn', function() {
         $("#dialog").dialog ("open");
         checkElement = $(this);
-    })
+    });
 
     ////тут работает кнопочка 'EDIT' которая по клику открывает формочку
 
@@ -46,7 +48,7 @@ $(document).ready(function(){
         $(currentElement.find('td')[1]).text($('#sku').val());
         $(currentElement.find('td')[2]).text($('#price').val());
         $('form').hide();
-    })
+    });
 
     $("div#dialog").dialog ({
         autoOpen : false,
@@ -61,25 +63,24 @@ $(document).ready(function(){
             }
         }
     });
-
-    /*$('#convert').on('click', function() {
-     var cols = $('#mytable th').map(function() {
-     return $(this).text()
-     }).slice(0,3);
-     var tableJson = $('#mytable tr').map(function(i) {
-     var row={};
-     $(this).find('td').each(function(i) {
-     var rowName = cols[i];
-     row[rowName] = $(this).text();
-     })
-     return row;
-     }).get();
-     console.log(JSON.stringify(tableJson).slice(1));
+    /*$('#convert').click( function() {
+     var table = $('#mytable').slice(0,2).tableToJSON(); // Convert the table into a javascript object
+     console.log(table);
+     alert(JSON.stringify(table));
      });*/
-
-    $('#convert').click( function() {
-        var table = $('#mytable').slice(0,2).tableToJSON(); // Convert the table into a javascript object
-        console.log(table);
-        alert(JSON.stringify(table));
+    $('body').on('click','#convert', function() {
+        var table = $('#mytable').slice(0,2).tableToJSON();
+        $("#dialogOne").dialog ("open");
+        $("#dialogOne p").text(JSON.stringify(table));
+    });
+    $("div#dialogOne").dialog ({
+        autoOpen : false,
+        modal: true,
+        width: 380,
+        buttons: {
+            "Ok, dude!": function() {
+                $(this).dialog("close");
+            }
+        }
     });
 });
