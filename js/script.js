@@ -8,19 +8,8 @@ $(document).ready(function(){
     $(function() {
         $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
     });
-    $('body').on('click','.plusbtn',function() {
-        $(".test").append('<tr><td></td><td></td><td>$</td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>');
-        $( ".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update" ).button();
-    });
 
-    //тут работает кнопочка 'REMOVE' и удаляет текущую строку
-
-    $('body').on('click','.minusbtn', function() {
-        $("#dialog").dialog ("open");
-        checkElement = $(this);
-    });
-
-    ////тут работает кнопочка 'EDIT' которая по клику открывает формочку
+     ////тут работает кнопочка 'EDIT' которая по клику открывает формочку
 
     $('body').on('click','.editbutton', function(e){
         var elem = $(e.target).parents('tr');
@@ -34,20 +23,40 @@ $(document).ready(function(){
         $('form').fadeIn('slow');
     });
 
+    //тут работает кнопочка 'REMOVE' и запоминает текущую строку
+
+    $('body').on('click','.minusbtn', function() {
+        $("#dialog").dialog ("open");
+        checkElement = $(this);
+    });
+
     //тут работает кнопочка 'CANCEL' в выпадающей форме и закрывает по клику форму
 
     $('#cancel').on('click', function(){
         $('form').hide();
+        currentElement=null;
+        $('form [type=text], form [type=number]').val('');
     });
 
     ////тут работает кнопочка 'SUBMIT' и по клику апдейтит содержимое строки
 
     $('form').on('submit', function(e){
         e.preventDefault();
-        $(currentElement.find('td')[0]).text($('#title').val());
-        $(currentElement.find('td')[1]).text($('#sku').val());
-        $(currentElement.find('td')[2]).text($('#price').val());
-        $('form').hide();
+        if ($('#title').val()=='' || $('#sku').val()=='' || $('#price').val()=='' )  alert('You have to fill all the cells');
+        else {
+            if (currentElement == null) {
+                currentElement = $('<tr><td></td><td></td><td></td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>')
+                $(".test").append(currentElement);
+                $(".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update").button();
+            }
+
+            $(currentElement.find('td')[0]).text($('#title').val());
+            $(currentElement.find('td')[1]).text($('#sku').val());
+            $(currentElement.find('td')[2]).text($('#price').val());
+            $('form').hide();
+            currentElement=null;
+            $('form [type=text], form [type=number]').val('');
+        }
     });
 
     $("div#dialog").dialog ({
@@ -60,6 +69,7 @@ $(document).ready(function(){
             },
             "No, let it live": function() {
                 $(this).dialog("close");
+                checkElement=null;
             }
         }
     });
@@ -76,11 +86,16 @@ $(document).ready(function(){
     $("div#dialogOne").dialog ({
         autoOpen : false,
         modal: true,
-        width: 380,
+        width: 400,
         buttons: {
             "Ok, dude!": function() {
                 $(this).dialog("close");
             }
         }
+    });
+
+    //ADD
+    $('body').on('click','.plusbtn',function() {
+        $('form').fadeIn('slow');
     });
 });
