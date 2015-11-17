@@ -42,20 +42,25 @@ $(document).ready(function(){
 
     $('form').on('submit', function(e){
         e.preventDefault();
+        var skus = [];
+        var sku_elements = $('#mytable tr:not(:first-child) td:nth-child(2)');
+        for (var i=0; i < sku_elements.length; i++ ){
+            skus.push($(sku_elements[i]).text());
+        }
         if ($('#title').val()=='' || $('#sku').val()=='' || $('#price').val()=='' )  alert('You have to fill all the cells');
+        else if (skus.indexOf($('#sku').val()) >=0 ) alert ('sku values must be unique');
         else {
             if (currentElement == null) {
                 currentElement = $('<tr><td></td><td></td><td></td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>')
                 $(".test").append(currentElement);
                 $(".plusbtn, .minusbtn,.editbutton, #cancel, #convert,#update").button();
             }
-
-            $(currentElement.find('td')[0]).text($('#title').val());
-            $(currentElement.find('td')[1]).text($('#sku').val());
-            $(currentElement.find('td')[2]).text($('#price').val());
-            $('form').hide();
-            currentElement=null;
-            $('form [type=text], form [type=number]').val('');
+                $(currentElement.find('td')[0]).text($('#title').val());
+                $(currentElement.find('td')[1]).text($('#sku').val());
+                $(currentElement.find('td')[2]).text($('#price').val());
+                $('form').hide();
+                currentElement = null;
+                $('form [type=text], form [type=number]').val('');
         }
     });
 
@@ -73,20 +78,19 @@ $(document).ready(function(){
             }
         }
     });
-    /*$('#convert').click( function() {
-     var table = $('#mytable').slice(0,2).tableToJSON(); // Convert the table into a javascript object
-     console.log(table);
-     alert(JSON.stringify(table));
-     });*/
+
     $('body').on('click','#convert', function() {
-        var table = $('#mytable').slice(0,2).tableToJSON();
+        var table = $('#mytable').tableToJSON();
+        var str = JSON.stringify(table, null, 2);
+        console.log(str);
         $("#dialogOne").dialog ("open");
-        $("#dialogOne p").text(JSON.stringify(table));
+        $("#dialogOne p").text(str);
     });
+
     $("div#dialogOne").dialog ({
         autoOpen : false,
         modal: true,
-        width: 400,
+        width: 250,
         buttons: {
             "Ok, dude!": function() {
                 $(this).dialog("close");

@@ -29,3 +29,6 @@ form {
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
     float: none;
 }
+#dialogOne p {
+    white-space: pre;
+}
