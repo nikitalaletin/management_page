@@ -48,7 +48,7 @@ $(document).ready(function(){
             skus.push($(sku_elements[i]).text());
         }
         if ($('#title').val()=='' || $('#sku').val()=='' || $('#price').val()=='' )  alert('You have to fill all the cells');
-        else if (skus.indexOf($('#sku').val()) >=0 ) alert ('sku values must be unique');
+        else if (skus.indexOf($('#sku').val()) >=0 && currentElement==null) alert ('sku values must be unique');
         else {
             if (currentElement == null) {
                 currentElement = $('<tr><td></td><td></td><td></td><td><input type="button" value="Remove" class="minusbtn" id="open"/><input type="button" value="Edit" class="editbutton"/></td></tr>')
